@@ -24,6 +24,10 @@
   outline: none;
   background-color: transparent;
   transition: 0.5s;
+  color: #513f4d;
+  font-weight: 500;
+  font-size: 1.1em;
+  font-family: sans-serif;
 }
 
 .search:focus {
