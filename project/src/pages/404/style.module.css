@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.name_error {
+  font-size: 3em;
+}
+
+.description_error {
+  font-size: 2em;
+}
+
+@media screen and (max-width: 500px) {
+  .description_error {
+    font-size: 1.3em;
+  }
+}

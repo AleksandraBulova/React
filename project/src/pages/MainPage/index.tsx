@@ -15,6 +15,7 @@ class MainPage extends React.Component {
     products: products,
   };
 
+  //Mounting
   componentDidMount(): void {
     const mySearch = localStorage.getItem('search');
     if (mySearch) {
@@ -22,6 +23,7 @@ class MainPage extends React.Component {
     }
   }
 
+  //Update
   componentDidUpdate(prevProps: MyState, prevState: MyState): void {
     if (prevState.search !== this.state.search) {
       const newProducts = products.filter(
@@ -37,6 +39,7 @@ class MainPage extends React.Component {
     }
   }
 
+  //Unmount
   componentWillUnmount(): void {
     localStorage.setItem('search', this.state.search);
   }
@@ -57,9 +60,11 @@ class MainPage extends React.Component {
           />
         </header>
         <div className={styles.wrapper_products}>
-          {this.state.products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+          {this.state.products.length === 0 ? (
+            <div className={styles.text_no_products}>No products found!</div>
+          ) : (
+            this.state.products.map((product) => <ProductCard key={product.id} product={product} />)
+          )}
         </div>
       </section>
     );
