@@ -13,7 +13,7 @@ export const routes: Route[] = [
   {
     id: 2,
     name: 'About',
-    path: '/AboutUs',
+    path: '/aboutUs',
     element: AboutPage,
   },
   {

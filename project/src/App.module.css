@@ -1,0 +1,25 @@
+@import './style/normalize';
+
+body {
+  background-size: cover;
+  font-size: 18px;
+  background-color: #e0d8cd;
+  color: #513f4d;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin: 0 auto;
+  padding: 20px 40px;
+  max-width: 1460px;
+  min-height: 100vh;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
