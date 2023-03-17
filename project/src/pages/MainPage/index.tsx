@@ -1,6 +1,7 @@
-import ProductCard from 'components/ProductCard';
+import React from 'react';
+import SectionHeader from 'components/Section/SectionHeader';
+import SectionProducts from 'components/Section/SectionProducts';
 import { products } from 'products';
-import React, { ChangeEvent } from 'react';
 import { Product } from 'types';
 import styles from './style.module.css';
 
@@ -21,6 +22,10 @@ class MainPage extends React.Component {
     if (mySearch) {
       this.setState((prev) => ({ ...prev, search: mySearch }));
     }
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('search', this.state.search);
+    });
   }
 
   //Update
@@ -45,27 +50,14 @@ class MainPage extends React.Component {
   }
 
   render() {
+    const setSearch = (value: string) => {
+      this.setState((prev) => ({ ...prev, search: value }));
+    };
+
     return (
       <section className={styles.section_main_page}>
-        <header className={styles.header_section}>
-          <h3>Search: </h3>
-          <input
-            className={styles.search}
-            type="text"
-            value={this.state.search}
-            placeholder="  search product"
-            onChange={(event: ChangeEvent<HTMLInputElement>) =>
-              this.setState((prev) => ({ ...prev, search: event.target.value }))
-            }
-          />
-        </header>
-        <div className={styles.wrapper_products}>
-          {this.state.products.length === 0 ? (
-            <div className={styles.text_no_products}>No products found!</div>
-          ) : (
-            this.state.products.map((product) => <ProductCard key={product.id} product={product} />)
-          )}
-        </div>
+        <SectionHeader search={this.state.search} setSearch={setSearch} />
+        <SectionProducts products={this.state.products} />
       </section>
     );
   }

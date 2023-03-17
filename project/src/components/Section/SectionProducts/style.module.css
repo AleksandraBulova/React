@@ -1,0 +1,13 @@
+.wrapper_products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+@media screen and (max-width: 565px) {
+  .text_no_products {
+    font-size: 1.2em;
+  }
+}

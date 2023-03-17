@@ -13,5 +13,5 @@ export interface Product {
   description: string;
   price: number;
   stock: number;
-  photo: Array<string>;
+  photo: string;
 }

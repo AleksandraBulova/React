@@ -15,6 +15,23 @@ class Header extends React.Component {
     name: 'Home',
   };
 
+  //Mounting
+  componentDidMount(): void {
+    const myName = localStorage.getItem('namePage');
+    if (myName) {
+      this.setState((prev) => ({ ...prev, name: myName }));
+    }
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('namePage', this.state.name);
+    });
+  }
+
+  //Unmount
+  componentWillUnmount(): void {
+    localStorage.setItem('namePage', this.state.name);
+  }
+
   render() {
     return (
       <header className={styles.header}>
