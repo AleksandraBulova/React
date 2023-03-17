@@ -40,6 +40,7 @@ class Header extends React.Component {
           <Link to={MainPage.path}>
             <button
               className={styles.button}
+              id="button-home"
               onClick={() => this.setState((prev) => ({ ...prev, name: 'Home' }))}
             >
               Home
@@ -48,6 +49,7 @@ class Header extends React.Component {
           <Link to={AboutUs.path}>
             <button
               className={styles.button}
+              id="button-about-us"
               onClick={() => this.setState((prev) => ({ ...prev, name: 'About US' }))}
             >
               About Us

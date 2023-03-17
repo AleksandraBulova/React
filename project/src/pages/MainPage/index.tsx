@@ -5,7 +5,7 @@ import { products } from 'products';
 import { Product } from 'types';
 import styles from './style.module.css';
 
-interface MyState {
+export interface MyState {
   search: string;
   products: Product[];
 }
@@ -49,14 +49,14 @@ class MainPage extends React.Component {
     localStorage.setItem('search', this.state.search);
   }
 
-  render() {
-    const setSearch = (value: string) => {
-      this.setState((prev) => ({ ...prev, search: value }));
-    };
+  setSearch = (value: string) => {
+    this.setState((prev) => ({ ...prev, search: value }));
+  };
 
+  render() {
     return (
       <section className={styles.section_main_page}>
-        <SectionHeader search={this.state.search} setSearch={setSearch} />
+        <SectionHeader search={this.state.search} setSearch={this.setSearch} />
         <SectionProducts products={this.state.products} />
       </section>
     );
