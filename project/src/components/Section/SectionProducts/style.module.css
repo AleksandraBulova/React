@@ -1,0 +1,24 @@
+.wrapper_products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.text_no_products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+}
+
+@media screen and (max-width: 565px) {
+  .text_no_products {
+    font-size: 1.2em;
+  }
+}
