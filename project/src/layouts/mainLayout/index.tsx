@@ -1,4 +1,3 @@
-import Footer from 'components/Footer';
 import Header from 'components/Header';
 import React, { ReactNode } from 'react';
 
@@ -12,7 +11,6 @@ class MainLayout extends React.Component<MainLayoutProps> {
       <>
         <Header />
         {this.props.children}
-        <Footer />
       </>
     );
   }

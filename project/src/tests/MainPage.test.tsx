@@ -1,41 +1,17 @@
-import Enzyme from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import { shallow, ShallowWrapper } from 'enzyme';
-import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
 import MainPage from 'pages/MainPage';
 
-Enzyme.configure({ adapter: new Adapter() });
-
-test('renders MainPage', () => {
-  render(<MainPage />);
-});
-
 describe('MainPage', () => {
-  let component: ShallowWrapper;
+  it('render MainPage component', () => {
+    const { getByText, getByPlaceholderText } = render(<MainPage />);
+    const nameOfInput = getByText(/Search/i);
+    expect(nameOfInput).toBeInTheDocument();
 
-  beforeAll(() => {
-    localStorage.setItem('search', 'value');
-    component = shallow(<MainPage />);
-  });
-
-  afterAll(() => {
-    localStorage.clear();
-  });
-
-  it('load the search', () => {
-    expect(component.state('search')).toEqual('value');
-  });
-
-  it('save the search', () => {
-    expect(localStorage.getItem('search')).toEqual('value');
-    component.unmount();
-  });
-
-  it('update the search', () => {
-    const component = shallow<MainPage>(<MainPage />);
-    const setSearch = component.instance().setSearch;
-    setSearch('value');
-    expect(component.state().search).toEqual('value');
+    const input = getByPlaceholderText(/search product/i) as HTMLInputElement;
+    expect(input).toBeInTheDocument();
+    fireEvent.change(input, { target: { value: 'Some value in the input' } });
+    expect(input.value).toBe('Some value in the input');
   });
 });

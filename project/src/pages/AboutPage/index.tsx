@@ -11,8 +11,8 @@ class AboutPage extends React.Component {
           <h1 className={styles.name}>Alekdandra Bulova</h1>
           <h3 className={styles.profession}>Front End Developer</h3>
           <p className={styles.decription}>
-            I&apos;m a front end developer. I&apos;m young ambitious used to go to my goal. I like
-            to work in a team. Now I want to spend all my strength and energy on training and
+            I&apos;m a frontend developer. I&apos;m young ambitious used to go to my goal. I like to
+            work in a team. Now I want to spend all my strength and energy on training and
             developing my professional skills. I&apos;m ready to work hard, study and improve
             myself. I&apos;m sociable easy to train hardworking accurate diligent attentive to
             details.
