@@ -1,7 +1,5 @@
 import { Route } from 'types';
-import MainPage from './pages/MainPage';
-import AboutPage from 'pages/AboutPage';
-import Page404 from './pages/404';
+import { MainPage, AboutPage, Page404 } from 'pages';
 
 export const routes: Route[] = [
   {

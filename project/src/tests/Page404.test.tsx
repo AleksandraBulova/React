@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
-import Page404 from 'pages/404';
+import { Page404 } from 'pages';
 
 describe('Page404', () => {
   it('render Page404 component', () => {

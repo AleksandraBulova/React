@@ -1,13 +1,14 @@
-import MainLayout from 'layouts/mainLayout';
 import React from 'react';
-import { Route, Routes } from 'react-router';
+import { MainLayout } from 'layouts/mainLayout';
 import { BrowserRouter } from 'react-router-dom';
+import { Route, Routes } from 'react-router';
 import { routes } from 'routes';
+import { routeName404 } from 'constants/constants';
 import styles from './App.module.css';
 
 class App extends React.Component {
-  validRoutes = routes.filter((route) => route.name !== '404');
-  Route404 = routes.find((route) => route.name === '404')!;
+  validRoutes = routes.filter((route) => route.name !== routeName404);
+  Route404 = routes.find((route) => route.name === routeName404)!;
 
   render() {
     return (
@@ -17,7 +18,7 @@ class App extends React.Component {
             <main className={styles.main}>
               <Routes>
                 {this.validRoutes
-                  .filter((route) => route.name !== '404')
+                  .filter((route) => route.name !== routeName404)
                   .map((route) => (
                     <Route key={route.id} path={route.path} element={<route.element />} />
                   ))}

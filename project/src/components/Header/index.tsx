@@ -10,7 +10,7 @@ interface MyState {
   name: string;
 }
 
-class Header extends React.Component {
+export class Header extends React.Component {
   state: MyState = {
     name: 'Home',
   };
@@ -60,5 +60,3 @@ class Header extends React.Component {
     );
   }
 }
-
-export default Header;

@@ -1,11 +1,11 @@
-import Header from 'components/Header';
+import { Header } from 'components';
 import React, { ReactNode } from 'react';
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
-class MainLayout extends React.Component<MainLayoutProps> {
+export class MainLayout extends React.Component<MainLayoutProps> {
   render() {
     return (
       <>
@@ -15,5 +15,3 @@ class MainLayout extends React.Component<MainLayoutProps> {
     );
   }
 }
-
-export default MainLayout;
