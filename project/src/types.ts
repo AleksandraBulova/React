@@ -15,3 +15,10 @@ export interface Product {
   stock: number;
   photo: string;
 }
+
+export interface InputValues {
+  name: string;
+  type: string;
+  value: string;
+  placeholder: string;
+}

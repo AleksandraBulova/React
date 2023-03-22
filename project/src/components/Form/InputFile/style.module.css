@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+input[type='file' i]::-webkit-file-upload-button {
+  grid-column: span 2;
+  justify-self: center;
+  padding: 0.3em 2em;
+  font-size: 0.9em;
+  background-color: #513f4d;
+  border: none;
+  border-radius: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  color: aliceblue;
+}
+
+input[type='file' i]::-webkit-file-upload-button:hover {
+  background-color: #e2a6c7;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 520px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
