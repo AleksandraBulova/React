@@ -1,16 +1,5 @@
 import { dataCardForm, FormElements } from 'types';
 
-const data: dataCardForm = {
-  name: '',
-  brand: '',
-  description: '',
-  price: '',
-  date: '',
-  category: '',
-  strength: '',
-  photo: '',
-};
-
 export const submitForm = async (
   event: React.FormEvent<HTMLFormElement>,
   habdleSubmitForm: (data: dataCardForm) => void
@@ -18,6 +7,16 @@ export const submitForm = async (
   event.preventDefault();
   const target = event.target as HTMLFormElement;
   const elements = target.elements as FormElements;
+  const data: dataCardForm = {
+    name: '',
+    brand: '',
+    description: '',
+    price: '',
+    date: '',
+    category: '',
+    strength: '',
+    photo: '',
+  };
   // const dates = ['name', 'brand', 'description', 'price', 'date', 'category', 'strength', 'photo'];
 
   // dates.map((elem) => {

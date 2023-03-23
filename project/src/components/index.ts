@@ -8,3 +8,4 @@ export * from './Form/SelectCategory';
 export * from './Form/InputFile';
 export * from './Form/InputRadio';
 export * from './Form/InputCheckbox';
+export * from './Form/CardForm';

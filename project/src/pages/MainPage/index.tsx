@@ -5,7 +5,7 @@ import { Product } from 'types';
 import styles from './style.module.css';
 import { filtertProducts } from 'utils/filtertProducts';
 
-export interface MyState {
+interface MyState {
   search: string;
   products: Product[];
 }

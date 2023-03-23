@@ -34,10 +34,6 @@ export class Form extends React.Component<IProp> {
     agreement: React.createRef(),
   };
 
-  handleSubmit(event: Event) {
-    event.preventDefault();
-  }
-
   render() {
     const refValue = [
       this.state.name,
