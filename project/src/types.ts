@@ -21,4 +21,28 @@ export interface InputValues {
   type: string;
   value: string;
   placeholder: string;
+  inputName: string;
+}
+
+export interface FormElements extends HTMLFormControlsCollection {
+  name: HTMLInputElement;
+  brand: HTMLInputElement;
+  description: HTMLInputElement;
+  price: HTMLInputElement;
+  date: HTMLInputElement;
+  category: HTMLInputElement;
+  strength: HTMLInputElement;
+  photo: HTMLInputElement;
+  agreement: HTMLInputElement;
+}
+
+export interface dataCardForm {
+  name: string;
+  brand: string;
+  description: string;
+  price: string;
+  date: string;
+  category: string;
+  strength: string;
+  photo: string;
 }

@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './style.module.css';
 
-export class InputRadio extends React.Component {
+interface IProp {
+  forwardedRef: React.RefObject<HTMLInputElement>;
+}
+
+export class InputRadio extends React.Component<IProp> {
   render() {
     const strengths = ['0% - 20%', '20% - 40%', '40% - 60%'];
     return (
@@ -11,7 +15,13 @@ export class InputRadio extends React.Component {
           {strengths.map((elem, index) => {
             return (
               <div key={index}>
-                <input type="radio" id={`strength${index}`} name="strength" value={elem} />
+                <input
+                  type="radio"
+                  id={`strength${index}`}
+                  name="strength"
+                  value={elem}
+                  ref={this.props.forwardedRef}
+                />
                 <label htmlFor={`strength${index}`}>{elem}</label>
               </div>
             );

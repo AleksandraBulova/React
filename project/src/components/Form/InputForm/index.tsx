@@ -6,17 +6,24 @@ interface IProps {
   type: string;
   placeholder: string;
   value?: string;
-  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  inputName: string;
+  forwardedRef: React.RefObject<HTMLInputElement>;
 }
 
 export class InputForm extends React.Component<IProps> {
   render() {
-    const { name, type, placeholder, onChange } = this.props;
+    const { name, type, placeholder, inputName, forwardedRef } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <label>{name}</label>
-        <input className={styles.input} type={type} placeholder={placeholder} onChange={onChange} />
+        <input
+          className={styles.input}
+          type={type}
+          placeholder={placeholder}
+          ref={forwardedRef}
+          name={inputName}
+        />
       </div>
     );
   }
