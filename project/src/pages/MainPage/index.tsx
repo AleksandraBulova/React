@@ -1,17 +1,12 @@
 import React from 'react';
 import { SectionHeader, SectionProducts } from 'components';
 import { products } from 'products';
-import { Product } from 'types';
+import { MyStateMainPage } from 'types';
 import styles from './style.module.css';
 import { filtertProducts } from 'utils/filtertProducts';
 
-interface MyState {
-  search: string;
-  products: Product[];
-}
-
 export class MainPage extends React.Component {
-  state: MyState = {
+  state: MyStateMainPage = {
     search: '',
     products: products,
   };
@@ -29,7 +24,7 @@ export class MainPage extends React.Component {
   }
 
   //Update
-  componentDidUpdate(prevProps: MyState, prevState: MyState): void {
+  componentDidUpdate(prevProps: MyStateMainPage, prevState: MyStateMainPage): void {
     if (prevState.search !== this.state.search) {
       const newProducts = filtertProducts(products, this.state.search);
       this.setState((prev) => ({ ...prev, products: newProducts }));

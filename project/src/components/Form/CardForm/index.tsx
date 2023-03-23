@@ -1,8 +1,8 @@
 import React from 'react';
-import { dataCardForm } from 'types';
+import { DataCardForm } from 'types';
 import styles from './style.module.css';
 
-export class CardForm extends React.Component<{ data: dataCardForm }> {
+export class CardForm extends React.Component<{ data: DataCardForm }> {
   render() {
     const { name, brand, description, price, date, category, strength, photo } = this.props.data;
 

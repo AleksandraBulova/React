@@ -16,6 +16,43 @@ export interface Product {
   photo: string;
 }
 
+export interface MyStateHeader {
+  name: string;
+  names: string[];
+}
+
+export interface MyStateMainPage {
+  search: string;
+  products: Product[];
+}
+
+export interface MyStateFormPage {
+  cards: DataCardForm[];
+  status: boolean;
+}
+
+export interface MyStateFrom {
+  name: React.RefObject<HTMLInputElement>;
+  nameERR: boolean;
+  brand: React.RefObject<HTMLInputElement>;
+  brandERR: boolean;
+  description: React.RefObject<HTMLInputElement>;
+  descriptionERR: boolean;
+  price: React.RefObject<HTMLInputElement>;
+  priceERR: boolean;
+  date: React.RefObject<HTMLInputElement>;
+  dateERR: boolean;
+  category: React.RefObject<HTMLSelectElement>;
+  categoryERR: boolean;
+  photo: React.RefObject<HTMLInputElement>;
+  photoERR: boolean;
+  strength: React.RefObject<HTMLInputElement>;
+  strengthERR: boolean;
+  agreement: React.RefObject<HTMLInputElement>;
+  agreementERR: boolean;
+  form: React.RefObject<HTMLFormElement>;
+}
+
 export interface InputValues {
   name: string;
   type: string;
@@ -36,7 +73,7 @@ export interface FormElements extends HTMLFormControlsCollection {
   agreement: HTMLInputElement;
 }
 
-export interface dataCardForm {
+export interface DataCardForm {
   name: string;
   brand: string;
   description: string;

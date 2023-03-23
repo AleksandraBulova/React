@@ -1,13 +1,15 @@
-import { dataCardForm, FormElements } from 'types';
+import { FormElements, DataCardForm } from 'types';
 
 export const submitForm = async (
   event: React.FormEvent<HTMLFormElement>,
-  habdleSubmitForm: (data: dataCardForm) => void
+  habdleSubmitForm: (data: DataCardForm) => void,
+  setError: (nameState: string, value: boolean) => void,
+  form: React.RefObject<HTMLFormElement>
 ) => {
   event.preventDefault();
   const target = event.target as HTMLFormElement;
   const elements = target.elements as FormElements;
-  const data: dataCardForm = {
+  const data: DataCardForm = {
     name: '',
     brand: '',
     description: '',
@@ -17,58 +19,98 @@ export const submitForm = async (
     strength: '',
     photo: '',
   };
-  // const dates = ['name', 'brand', 'description', 'price', 'date', 'category', 'strength', 'photo'];
+  const check = {
+    name: false,
+    brand: false,
+    description: false,
+    price: false,
+    date: false,
+    category: false,
+    strength: false,
+  };
 
-  // dates.map((elem) => {
-  //   if (elements[elem].value) {
-  //     data[elem] = elements[elem].value;
-  //   }
-  // });
+  const onlyChars = new RegExp(/^([^0-9]*)$/);
 
-  if (elements.name.value) {
+  if (
+    elements.name.value &&
+    elements.name.value.length >= 3 &&
+    elements.name.value.length < 25 &&
+    elements.name.value[0] === elements.name.value[0].toUpperCase() &&
+    onlyChars.test(elements.name.value)
+  ) {
     data.name = elements.name.value;
+    check.name = true;
+    setError('nameERR', false);
   } else {
-    console.log('name');
+    setError('nameERR', true);
   }
 
-  if (elements.brand.value) {
+  if (
+    elements.brand.value &&
+    elements.brand.value.length >= 3 &&
+    elements.brand.value.length < 25 &&
+    elements.brand.value[0] === elements.brand.value[0].toUpperCase() &&
+    onlyChars.test(elements.brand.value)
+  ) {
     data.brand = elements.brand.value;
+    check.brand = true;
+    setError('brandERR', false);
   } else {
-    console.log('brand');
+    setError('brandERR', true);
   }
 
-  if (elements.description.value) {
+  if (
+    elements.description.value &&
+    elements.description.value.split(' ').length >= 2 &&
+    elements.description.value.length < 40
+  ) {
     data.description = elements.description.value;
+    check.description = true;
+    setError('descriptionERR', false);
   } else {
-    console.log('description');
+    setError('descriptionERR', true);
   }
 
-  if (elements.price.value) {
+  if (elements.price.value && +elements.price.value >= 0 && elements.price.value.length < 25) {
     data.price = elements.price.value;
+    check.price = true;
+    setError('priceERR', false);
   } else {
-    console.log('price');
+    setError('priceERR', true);
   }
 
   if (elements.date.value) {
     data.date = elements.date.value;
+    check.date = true;
+    setError('dateERR', false);
   } else {
-    console.log('date');
+    setError('dateERR', true);
   }
 
   if (elements.category.value) {
     data.category = elements.category.value;
+    check.category = true;
+    setError('categoryERR', false);
   } else {
-    console.log('category');
+    setError('categoryERR', true);
   }
 
   if (elements.strength.value) {
     data.strength = elements.strength.value;
+    check.strength = true;
+    setError('strengthERR', false);
   } else {
-    console.log('strength');
+    setError('strengthERR', true);
   }
 
   if (elements.agreement.checked) {
-    if (elements.photo.files) {
+    setError('agreementERR', false);
+  } else {
+    setError('agreementERR', true);
+  }
+
+  if (elements.photo.files) {
+    if (elements.photo.files.length) {
       const fr = new FileReader();
       const file = elements.photo.files[0];
       fr.readAsArrayBuffer(file);
@@ -77,13 +119,24 @@ export const submitForm = async (
           const blob = new Blob([fr.result]);
           const url = URL.createObjectURL(blob);
           data.photo = url;
-          habdleSubmitForm(data);
+          if (
+            check.name &&
+            check.brand &&
+            check.description &&
+            check.price &&
+            check.date &&
+            check.category &&
+            check.strength &&
+            elements.agreement.checked
+          ) {
+            habdleSubmitForm(data);
+            form.current?.reset();
+          }
         }
       };
+      setError('photoERR', false);
     } else {
-      console.log('photo');
+      setError('photoERR', true);
     }
-  } else {
-    console.log('agreement');
   }
 };

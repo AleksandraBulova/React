@@ -21,6 +21,10 @@ input[type='file' i]::-webkit-file-upload-button:hover {
   opacity: 0.8;
 }
 
+.error {
+  color: red;
+}
+
 @media screen and (max-width: 520px) {
   .wrapper {
     flex-direction: column;

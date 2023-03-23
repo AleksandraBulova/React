@@ -2,15 +2,11 @@ import { routeNameAboutUS, routeNameForm, routeNameHome } from 'constants/consta
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from 'routes';
+import { MyStateHeader } from 'types';
 import styles from './style.module.css';
 
-interface MyState {
-  name: string;
-  names: string[];
-}
-
 export class Header extends React.Component {
-  state: MyState = {
+  state: MyStateHeader = {
     name: 'Home',
     names: [routeNameHome, routeNameAboutUS, routeNameForm],
   };

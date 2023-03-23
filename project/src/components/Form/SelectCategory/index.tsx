@@ -3,6 +3,7 @@ import styles from './style.module.css';
 
 interface IProp {
   forwardedRef: React.RefObject<HTMLSelectElement>;
+  error: boolean;
 }
 
 export class SelectCategory extends React.Component<IProp> {
@@ -11,8 +12,15 @@ export class SelectCategory extends React.Component<IProp> {
     return (
       <div className={styles.wrapper_select}>
         <label>Category: </label>
-        <select name="category" className={styles.select} ref={this.props.forwardedRef}>
-          <option>Select type of alcohol</option>
+        <select
+          name="category"
+          className={styles.select}
+          ref={this.props.forwardedRef}
+          defaultValue=""
+        >
+          <option disabled value="">
+            Select type of alcohol
+          </option>
           {categories.map((elem, index) => {
             return (
               <option key={index} value={elem}>
@@ -21,6 +29,7 @@ export class SelectCategory extends React.Component<IProp> {
             );
           })}
         </select>
+        {this.props.error && <div className={styles.error}>Error</div>}
       </div>
     );
   }

@@ -24,6 +24,10 @@
   background-color: #e0d8cd;
 }
 
+.error {
+  color: red;
+}
+
 @media screen and (max-width: 520px) {
   .wrapper_select {
     flex-direction: column;

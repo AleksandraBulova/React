@@ -3,6 +3,7 @@ import styles from './style.module.css';
 
 interface IProp {
   forwardedRef: React.RefObject<HTMLInputElement>;
+  error: boolean;
 }
 
 export class InputRadio extends React.Component<IProp> {
@@ -27,6 +28,7 @@ export class InputRadio extends React.Component<IProp> {
             );
           })}
         </label>
+        {this.props.error && <div className={styles.error}>Error</div>}
       </div>
     );
   }

@@ -5,14 +5,14 @@ interface IProps {
   name: string;
   type: string;
   placeholder: string;
-  value?: string;
   inputName: string;
   forwardedRef: React.RefObject<HTMLInputElement>;
+  error: boolean;
 }
 
 export class InputForm extends React.Component<IProps> {
   render() {
-    const { name, type, placeholder, inputName, forwardedRef } = this.props;
+    const { name, type, placeholder, inputName, forwardedRef, error } = this.props;
 
     return (
       <div className={styles.wrapper}>
@@ -24,6 +24,7 @@ export class InputForm extends React.Component<IProps> {
           ref={forwardedRef}
           name={inputName}
         />
+        {error && <div className={styles.error}>Error</div>}
       </div>
     );
   }
