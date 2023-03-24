@@ -61,7 +61,7 @@ export class Form extends React.Component<IProp> {
       >
         <div className={styles.container1}>
           {inputValues.map((elem, index) => {
-            const { name, type, placeholder, inputName } = elem;
+            const { name, type, placeholder, inputName, dataTitle } = elem;
             return (
               <InputForm
                 key={index}
@@ -71,6 +71,7 @@ export class Form extends React.Component<IProp> {
                 forwardedRef={refValue[index]}
                 inputName={inputName}
                 error={errors[index]}
+                dataTitle={dataTitle}
               />
             );
           })}

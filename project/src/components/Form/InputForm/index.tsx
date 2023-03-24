@@ -8,15 +8,16 @@ interface IProps {
   inputName: string;
   forwardedRef: React.RefObject<HTMLInputElement>;
   error: boolean;
+  dataTitle: string;
 }
 
 export class InputForm extends React.Component<IProps> {
   render() {
-    const { name, type, placeholder, inputName, forwardedRef, error } = this.props;
+    const { name, type, placeholder, inputName, forwardedRef, error, dataTitle } = this.props;
 
     return (
       <div className={styles.wrapper}>
-        <label>{name}</label>
+        <label title={dataTitle}>{name}</label>
         <input
           className={styles.input}
           type={type}

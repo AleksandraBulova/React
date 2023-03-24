@@ -59,6 +59,7 @@ export interface InputValues {
   value: string;
   placeholder: string;
   inputName: string;
+  dataTitle: string;
 }
 
 export interface FormElements extends HTMLFormControlsCollection {

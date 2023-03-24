@@ -2,7 +2,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
 import { CardForm } from 'components';
-import Photo from '../assets/images/Photo.jpg';
+import photo from '../assets/images/Photo.jpg';
 
 describe('CardForm', () => {
   it('render CardForm component', () => {
@@ -14,7 +14,7 @@ describe('CardForm', () => {
       date: '31.03.2023',
       category: 'Wine',
       strength: '0% - 10%',
-      photo: Photo,
+      photo: photo,
     };
     render(<CardForm data={data} />);
   });

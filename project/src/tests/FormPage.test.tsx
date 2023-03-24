@@ -47,6 +47,11 @@ describe('FormPage', () => {
     fireEvent.change(pricePlaceholder, { target: { value: 25 } });
     expect(pricePlaceholder.value).toBe('25');
 
+    const datePlaceholder = getByPlaceholderText(/date alcohol/i) as HTMLInputElement;
+    expect(datePlaceholder).toBeInTheDocument();
+    fireEvent.change(datePlaceholder, { target: { value: '2023-03-24' } });
+    expect(datePlaceholder.value).toBe('2023-03-24');
+
     fireEvent.click(submit);
   });
 });
