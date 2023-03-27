@@ -11,6 +11,10 @@ export class MainPage extends React.Component {
     products: products,
   };
 
+  beforeunload = () => {
+    localStorage.setItem('search', this.state.search);
+  };
+
   //Mounting
   componentDidMount(): void {
     const mySearch = localStorage.getItem('search');
@@ -18,9 +22,7 @@ export class MainPage extends React.Component {
       this.setState((prev) => ({ ...prev, search: mySearch }));
     }
 
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('search', this.state.search);
-    });
+    window.addEventListener('beforeunload', this.beforeunload);
   }
 
   //Update
@@ -34,6 +36,7 @@ export class MainPage extends React.Component {
   //Unmount
   componentWillUnmount(): void {
     localStorage.setItem('search', this.state.search);
+    window.removeEventListener('beforeunload', this.beforeunload);
   }
 
   setSearch = (value: string) => {

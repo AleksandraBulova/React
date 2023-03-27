@@ -16,6 +16,22 @@ describe('CardForm', () => {
       strength: '0% - 10%',
       photo: photo,
     };
-    render(<CardForm data={data} />);
+
+    const { getByText } = render(<CardForm data={data} />);
+
+    const name = getByText(/Rosado/i);
+    expect(name).toBeInTheDocument();
+    const brand = getByText(/Finca Nueva/i);
+    expect(brand).toBeInTheDocument();
+    const description = getByText(/Rose, dry, 0.75l./i);
+    expect(description).toBeInTheDocument();
+    const price = getByText(/25/i);
+    expect(price).toBeInTheDocument();
+    const date = getByText(/31.03.2023/i);
+    expect(date).toBeInTheDocument();
+    const category = getByText(/Wine/i);
+    expect(category).toBeInTheDocument();
+    const strength = getByText(/0% - 10%/i);
+    expect(strength).toBeInTheDocument();
   });
 });

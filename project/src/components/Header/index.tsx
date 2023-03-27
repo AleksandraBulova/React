@@ -11,6 +11,12 @@ export class Header extends React.Component {
     names: [routeNameHome, routeNameAboutUS, routeNameForm],
   };
 
+  routesForHeader = routes.slice(0, routes.length - 1);
+
+  beforeunload = () => {
+    localStorage.setItem('namePage', this.state.name);
+  };
+
   //Mounting
   componentDidMount(): void {
     const myName = localStorage.getItem('namePage');
@@ -18,14 +24,13 @@ export class Header extends React.Component {
       this.setState((prev) => ({ ...prev, name: myName }));
     }
 
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('namePage', this.state.name);
-    });
+    window.addEventListener('beforeunload', this.beforeunload);
   }
 
   //Unmount
   componentWillUnmount(): void {
     localStorage.setItem('namePage', this.state.name);
+    window.removeEventListener('beforeunload', this.beforeunload);
   }
 
   render() {
@@ -33,7 +38,7 @@ export class Header extends React.Component {
       <header className={styles.header}>
         <h1>{this.state.name}</h1>
         <div className={styles.wrapper_button}>
-          {routes.slice(0, routes.length - 1).map((route, index) => {
+          {this.routesForHeader.map((route, index) => {
             return (
               <Link key={index} to={route.path}>
                 <button
