@@ -1,8 +1,10 @@
+import { FC } from 'react';
+
 export interface Route {
   id: number;
   name: string;
   path: string;
-  element: React.ComponentClass;
+  element: FC;
 }
 
 export interface Product {
@@ -14,11 +16,6 @@ export interface Product {
   price: number;
   stock: number;
   photo: string;
-}
-
-export interface MyStateHeader {
-  name: string;
-  names: string[];
 }
 
 export interface MyStateMainPage {

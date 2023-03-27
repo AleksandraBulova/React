@@ -1,60 +1,26 @@
-import { routeNameAboutUS, routeNameForm, routeNameHome } from 'constants/constants';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { FC } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { routes } from 'routes';
-import { MyStateHeader } from 'types';
 import styles from './style.module.css';
 
-export class Header extends React.Component {
-  state: MyStateHeader = {
-    name: 'Home',
-    names: [routeNameHome, routeNameAboutUS, routeNameForm],
-  };
+export const Header: FC = () => {
+  const headerRoutes = routes.slice(0, routes.length - 1);
+  const { pathname } = useLocation();
 
-  routesForHeader = routes.slice(0, routes.length - 1);
+  const routeTitle = routes.find((route) => route.path === pathname)?.name || '404';
 
-  beforeunload = () => {
-    localStorage.setItem('namePage', this.state.name);
-  };
-
-  //Mounting
-  componentDidMount(): void {
-    const myName = localStorage.getItem('namePage');
-    if (myName) {
-      this.setState((prev) => ({ ...prev, name: myName }));
-    }
-
-    window.addEventListener('beforeunload', this.beforeunload);
-  }
-
-  //Unmount
-  componentWillUnmount(): void {
-    localStorage.setItem('namePage', this.state.name);
-    window.removeEventListener('beforeunload', this.beforeunload);
-  }
-
-  render() {
-    return (
-      <header className={styles.header}>
-        <h1>{this.state.name}</h1>
-        <div className={styles.wrapper_button}>
-          {this.routesForHeader.map((route, index) => {
-            return (
-              <Link key={index} to={route.path}>
-                <button
-                  className={styles.button}
-                  id={`button-${this.state.names[index]}`}
-                  onClick={() =>
-                    this.setState((prev) => ({ ...prev, name: this.state.names[index] }))
-                  }
-                >
-                  {this.state.names[index]}
-                </button>
-              </Link>
-            );
-          })}
-        </div>
-      </header>
-    );
-  }
-}
+  return (
+    <header className={styles.header}>
+      <h1>{routeTitle}</h1>
+      <div className={styles.wrapper_button}>
+        {headerRoutes.map((route, index) => {
+          return (
+            <Link key={index} to={route.path}>
+              <button className={styles.button}>{route.name}</button>
+            </Link>
+          );
+        })}
+      </div>
+    </header>
+  );
+};
