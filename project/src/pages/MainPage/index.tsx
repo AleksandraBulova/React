@@ -1,54 +1,54 @@
-import React from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { SectionHeader, SectionProducts } from 'components';
 import { products } from 'products';
-import { MyStateMainPage } from 'types';
 import styles from './style.module.css';
 import { filtertProducts } from 'utils/filtertProducts';
 
-export class MainPage extends React.Component {
-  state: MyStateMainPage = {
-    search: '',
-    products: products,
-  };
+export const MainPage: FC = () => {
+  const [state, setState] = useState(() => {
+    const initialSearch = localStorage.getItem('search') || '';
+    const initialProducts = initialSearch ? filtertProducts(products, initialSearch) : products;
 
-  beforeunload = () => {
-    localStorage.setItem('search', this.state.search);
-  };
+    return {
+      search: initialSearch,
+      products: initialProducts,
+    };
+  });
+
+  const inputValue = useRef(state.search);
 
   //Mounting
-  componentDidMount(): void {
-    const mySearch = localStorage.getItem('search');
-    if (mySearch) {
-      this.setState((prev) => ({ ...prev, search: mySearch }));
-    }
+  useEffect(() => {
+    const beforeunload = () => {
+      localStorage.setItem('search', inputValue.current);
+    };
 
-    window.addEventListener('beforeunload', this.beforeunload);
-  }
+    window.addEventListener('beforeunload', beforeunload);
+
+    //Unmount
+    return () => {
+      localStorage.setItem('search', inputValue.current);
+      window.removeEventListener('beforeunload', beforeunload);
+    };
+  }, []);
 
   //Update
-  componentDidUpdate(prevProps: MyStateMainPage, prevState: MyStateMainPage): void {
-    if (prevState.search !== this.state.search) {
-      const newProducts = filtertProducts(products, this.state.search);
-      this.setState((prev) => ({ ...prev, products: newProducts }));
+  useEffect(() => {
+    if (state.search) {
+      const newProducts = filtertProducts(products, state.search);
+      setState((prev) => ({ ...prev, products: newProducts }));
+      inputValue.current = state.search;
     }
-  }
+  }, [state.search]);
 
-  //Unmount
-  componentWillUnmount(): void {
-    localStorage.setItem('search', this.state.search);
-    window.removeEventListener('beforeunload', this.beforeunload);
-  }
-
-  setSearch = (value: string) => {
-    this.setState((prev) => ({ ...prev, search: value }));
+  const setSearch = (value: string) => {
+    setState((prev) => ({ ...prev, search: value }));
   };
 
-  render() {
-    return (
-      <section className={styles.section_main_page}>
-        <SectionHeader search={this.state.search} setSearch={this.setSearch} />
-        <SectionProducts products={this.state.products} />
-      </section>
-    );
-  }
-}
+  return (
+    <section className={styles.section_main_page}>
+      <SectionHeader search={state.search} setSearch={setSearch} />
+      <SectionProducts products={state.products} />
+    </section>
+  );
+};
