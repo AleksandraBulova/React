@@ -56,4 +56,8 @@
   .decription {
     font-size: 0.8em;
   }
+
+  .wrapper_section {
+    padding-top: 20px;
+  }
 }

@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.error {
+  color: red;
+}
+
+@media screen and (max-width: 520px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 5px;
+  }
+}

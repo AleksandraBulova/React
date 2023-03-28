@@ -1,10 +1,10 @@
 import React from 'react';
-import { Product } from 'types';
+import { DataCardForm } from 'types';
 import styles from './style.module.css';
 
-export class ProductCard extends React.Component<{ product: Product }> {
+export class CardForm extends React.Component<{ data: DataCardForm }> {
   render() {
-    const { name, brand, type, description, stock, price, photo } = this.props.product;
+    const { name, brand, description, price, date, category, strength, photo } = this.props.data;
 
     return (
       <div className={styles.product}>
@@ -12,9 +12,10 @@ export class ProductCard extends React.Component<{ product: Product }> {
         <h3 className={styles.product_name}>{name}</h3>
         <ul className={styles.info}>
           <li className={styles.info_brand}>{brand}</li>
+          <li className={styles.info_date}>{date}</li>
+          <li className={styles.info_category}> {category}</li>
+          <li className={styles.info_strength}>{strength}</li>
           <li className={styles.info_description}>{description}</li>
-          <li className={styles.info_category}> {type}</li>
-          <li className={styles.info_stock}>Stock: {stock}</li>
           <li className={styles.info_price}>{`${price} $`}</li>
         </ul>
       </div>

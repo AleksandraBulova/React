@@ -1,0 +1,36 @@
+.wrapper_select {
+  display: flex;
+  gap: 10px;
+}
+
+.select {
+  padding: 0 0.2em;
+  border: none;
+  border-bottom: 2px solid gray;
+  outline: none;
+  background-color: transparent;
+  transition: 0.5s;
+  color: #513f4d;
+  font-weight: 500;
+  font-size: 1.1em;
+  font-family: sans-serif;
+}
+
+.select:focus {
+  border-bottom: 2px solid #513f4d;
+}
+
+.select option {
+  background-color: #e0d8cd;
+}
+
+.error {
+  color: red;
+}
+
+@media screen and (max-width: 520px) {
+  .wrapper_select {
+    flex-direction: column;
+    gap: 5px;
+  }
+}

@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import MainPage from 'pages/MainPage';
+import { MainPage } from 'pages';
 
 describe('MainPage', () => {
   it('render MainPage component', () => {

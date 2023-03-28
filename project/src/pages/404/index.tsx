@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './style.module.css';
 
-class Page404 extends React.Component {
+export class Page404 extends React.Component {
   render() {
     return (
       <section className={styles.wrapper}>
@@ -11,5 +11,3 @@ class Page404 extends React.Component {
     );
   }
 }
-
-export default Page404;

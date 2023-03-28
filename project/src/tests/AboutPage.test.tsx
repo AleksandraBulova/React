@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { render } from '@testing-library/react';
-import AboutPage from 'pages/AboutPage';
+import { AboutPage } from 'pages';
 
 describe('AboutPage', () => {
   it('render AboutPage component', () => {

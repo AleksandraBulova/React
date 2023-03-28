@@ -6,7 +6,7 @@ interface IProps {
   setSearch: (value: string) => void;
 }
 
-class SectionHeader extends React.Component<IProps> {
+export class SectionHeader extends React.Component<IProps> {
   render() {
     return (
       <header className={styles.header_section}>
@@ -24,5 +24,3 @@ class SectionHeader extends React.Component<IProps> {
     );
   }
 }
-
-export default SectionHeader;

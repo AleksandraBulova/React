@@ -1,17 +1,12 @@
 import React from 'react';
-import SectionHeader from 'components/Section/SectionHeader';
-import SectionProducts from 'components/Section/SectionProducts';
+import { SectionHeader, SectionProducts } from 'components';
 import { products } from 'products';
-import { Product } from 'types';
+import { MyStateMainPage } from 'types';
 import styles from './style.module.css';
+import { filtertProducts } from 'utils/filtertProducts';
 
-export interface MyState {
-  search: string;
-  products: Product[];
-}
-
-class MainPage extends React.Component {
-  state: MyState = {
+export class MainPage extends React.Component {
+  state: MyStateMainPage = {
     search: '',
     products: products,
   };
@@ -29,17 +24,9 @@ class MainPage extends React.Component {
   }
 
   //Update
-  componentDidUpdate(prevProps: MyState, prevState: MyState): void {
+  componentDidUpdate(prevProps: MyStateMainPage, prevState: MyStateMainPage): void {
     if (prevState.search !== this.state.search) {
-      const newProducts = products.filter(
-        (product) =>
-          product.name.toLowerCase().includes(this.state.search.toLowerCase()) ||
-          product.brand.toLowerCase().includes(this.state.search.toLowerCase()) ||
-          product.type.toLowerCase().includes(this.state.search.toLowerCase()) ||
-          product.description.toLowerCase().includes(this.state.search.toLowerCase()) ||
-          String(product.price).includes(this.state.search) ||
-          String(product.stock).includes(this.state.search)
-      );
+      const newProducts = filtertProducts(products, this.state.search);
       this.setState((prev) => ({ ...prev, products: newProducts }));
     }
   }
@@ -62,5 +49,3 @@ class MainPage extends React.Component {
     );
   }
 }
-
-export default MainPage;

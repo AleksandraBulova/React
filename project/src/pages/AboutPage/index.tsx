@@ -2,7 +2,7 @@ import React from 'react';
 import Photo from '../../assets/images/Photo.jpg';
 import styles from './style.module.css';
 
-class AboutPage extends React.Component {
+export class AboutPage extends React.Component {
   render() {
     return (
       <section className={styles.wrapper_section}>
@@ -22,5 +22,3 @@ class AboutPage extends React.Component {
     );
   }
 }
-
-export default AboutPage;
