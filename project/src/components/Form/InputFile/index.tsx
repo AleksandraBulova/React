@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styles from './style.module.css';
 
 interface IProp {
@@ -6,14 +6,12 @@ interface IProp {
   error: boolean;
 }
 
-export class InputFile extends React.Component<IProp> {
-  render() {
-    return (
-      <div className={styles.wrapper}>
-        <label>Photo: </label>
-        <input type="file" name="photo" ref={this.props.forwardedRef} />
-        {this.props.error && <div className={styles.error}>Error</div>}
-      </div>
-    );
-  }
-}
+export const InputFile: FC<IProp> = ({ forwardedRef, error }) => {
+  return (
+    <div className={styles.wrapper}>
+      <label>Photo: </label>
+      <input type="file" name="photo" ref={forwardedRef} />
+      {error && <div className={styles.error}>Error</div>}
+    </div>
+  );
+};
