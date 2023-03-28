@@ -1,38 +1,36 @@
-import React from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { CardForm, Form } from 'components';
 import styles from './style.module.css';
 import { MyStateFormPage, DataCardForm } from 'types';
 
-export class FormPage extends React.Component {
-  state: MyStateFormPage = {
+export const FormPage: FC = () => {
+  const [state, setState] = useState<MyStateFormPage>({
     cards: [],
     status: false,
-  };
+  });
 
-  componentDidUpdate(prevProps: MyStateFormPage, prevState: MyStateFormPage): void {
-    if (prevState.cards !== this.state.cards) {
-      this.setState((prev) => ({ ...prev, status: true }));
+  useEffect(() => {
+    if (state.cards.length) {
+      setState((prev) => ({ ...prev, status: true }));
       setTimeout(() => {
-        this.setState((prev) => ({ ...prev, status: false }));
+        setState((prev) => ({ ...prev, status: false }));
       }, 2500);
     }
-  }
+  }, [state.cards]);
 
-  render() {
-    const habdleSubmitForm = (data: DataCardForm) => {
-      this.setState((prev) => ({ ...prev, cards: [...this.state.cards, data] }));
-    };
+  const habdleSubmitForm = (data: DataCardForm) => {
+    setState((prev) => ({ ...prev, cards: [...state.cards, data] }));
+  };
 
-    return (
-      <section className={styles.wrapper_sectio}>
-        <Form habdleSubmitForm={habdleSubmitForm} />
-        {this.state.status && <div className={styles.status}>Card added</div>}
-        <div className={styles.wrapper_cards}>
-          {this.state.cards.map((card, index) => (
-            <CardForm key={index} data={card} />
-          ))}
-        </div>
-      </section>
-    );
-  }
-}
+  return (
+    <section className={styles.wrapper_sectio}>
+      <Form habdleSubmitForm={habdleSubmitForm} />
+      {state.status && <div className={styles.status}>Card added</div>}
+      <div className={styles.wrapper_cards}>
+        {state.cards.map((card, index) => (
+          <CardForm key={index} data={card} />
+        ))}
+      </div>
+    </section>
+  );
+};
