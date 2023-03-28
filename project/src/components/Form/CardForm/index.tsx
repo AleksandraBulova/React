@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
-import { DataCardForm } from 'types';
+import { FieldValues } from 'react-hook-form';
 import styles from './style.module.css';
 
 interface IProp {
-  data: DataCardForm;
+  data: FieldValues;
 }
 
 export const CardForm: FC<IProp> = ({ data }) => {

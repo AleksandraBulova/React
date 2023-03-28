@@ -25,7 +25,7 @@ input[type='file' i]::-webkit-file-upload-button:hover {
   color: red;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 570px) {
   .wrapper {
     flex-direction: column;
     gap: 5px;

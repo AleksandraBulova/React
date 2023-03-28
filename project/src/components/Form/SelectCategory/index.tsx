@@ -1,17 +1,27 @@
 import React, { FC } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import styles from './style.module.css';
 
 interface IProp {
-  forwardedRef: React.RefObject<HTMLSelectElement>;
-  error: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
 }
 
-export const SelectCategory: FC<IProp> = ({ forwardedRef, error }) => {
+export const SelectCategory: FC<IProp> = ({ register, errors }) => {
   const categories = ['Wine', 'Whiskey', 'Cognac', 'Vodka'];
+  const nameCategory = 'category';
+  const error = errors[nameCategory]?.message as string;
+
   return (
     <div className={styles.wrapper_select}>
       <label>Category: </label>
-      <select name="category" className={styles.select} ref={forwardedRef} defaultValue="">
+      <select
+        className={styles.select}
+        {...register(`${nameCategory}`, {
+          required: 'requiered',
+        })}
+        defaultValue=""
+      >
         <option disabled value="">
           Select type of alcohol
         </option>
@@ -23,7 +33,7 @@ export const SelectCategory: FC<IProp> = ({ forwardedRef, error }) => {
           );
         })}
       </select>
-      {error && <div className={styles.error}>Error</div>}
+      {errors[nameCategory]?.message && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

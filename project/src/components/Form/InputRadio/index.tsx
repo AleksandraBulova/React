@@ -1,13 +1,17 @@
 import React, { FC } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import styles from './style.module.css';
 
 interface IProp {
-  forwardedRef: React.RefObject<HTMLInputElement>;
-  error: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
 }
 
-export const InputRadio: FC<IProp> = ({ forwardedRef, error }) => {
+export const InputRadio: FC<IProp> = ({ register, errors }) => {
   const strengths = ['0% - 20%', '20% - 40%', '40% - 60%'];
+  const nameStrength = 'strength';
+  const error = errors[nameStrength]?.message as string;
+
   return (
     <div className={styles.wrapper}>
       <label className={styles.wrapper_radio}>
@@ -18,16 +22,17 @@ export const InputRadio: FC<IProp> = ({ forwardedRef, error }) => {
               <input
                 type="radio"
                 id={`strength${index}`}
-                name="strength"
                 value={elem}
-                ref={forwardedRef}
+                {...register(`${nameStrength}`, {
+                  required: 'requiered',
+                })}
               />
               <label htmlFor={`strength${index}`}>{elem}</label>
             </div>
           );
         })}
       </label>
-      {error && <div className={styles.error}>Error</div>}
+      {errors[nameStrength]?.message && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

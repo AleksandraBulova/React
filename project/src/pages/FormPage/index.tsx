@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { CardForm, Form } from 'components';
 import styles from './style.module.css';
-import { MyStateFormPage, DataCardForm } from 'types';
+import { MyStateFormPage } from 'types';
+import { FieldValues } from 'react-hook-form';
 
 export const FormPage: FC = () => {
   const [state, setState] = useState<MyStateFormPage>({
@@ -18,13 +19,13 @@ export const FormPage: FC = () => {
     }
   }, [state.cards]);
 
-  const habdleSubmitForm = (data: DataCardForm) => {
+  const setCards = (data: FieldValues) => {
     setState((prev) => ({ ...prev, cards: [...state.cards, data] }));
   };
 
   return (
     <section className={styles.wrapper_sectio}>
-      <Form habdleSubmitForm={habdleSubmitForm} />
+      <Form setCards={setCards} />
       {state.status && <div className={styles.status}>Card added</div>}
       <div className={styles.wrapper_cards}>
         {state.cards.map((card, index) => (

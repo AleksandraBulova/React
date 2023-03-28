@@ -1,13 +1,32 @@
-import { InputValues } from 'types';
+import { InputValue } from 'types';
 
-export const inputValues: InputValues[] = [
+export const inputValues: InputValue[] = [
   {
     name: 'Name:',
     type: 'text',
     value: '',
     placeholder: 'name alcohol',
     inputName: 'name',
-    dataTitle: 'name starts with uppercased letter and 3 <= name length < 25',
+    dataTitle: 'name starts with uppercase letter and 3 <= name length <= 25',
+    validation: {
+      required: 'requiered',
+      minLength: {
+        value: 3,
+        message: 'min 3 letters',
+      },
+      maxLength: {
+        value: 25,
+        message: 'max 25 letters',
+      },
+      validate: {
+        firstLetterUpperCase: (value: string) =>
+          value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
+        onlyLetters: (value: string) => {
+          const onlyChars = new RegExp(/^([^0-9]*)$/);
+          return onlyChars.test(value) ? undefined : 'only letters';
+        },
+      },
+    },
   },
   {
     name: 'Brand:',
@@ -15,7 +34,26 @@ export const inputValues: InputValues[] = [
     value: '',
     placeholder: 'brand alcohol',
     inputName: 'brand',
-    dataTitle: 'brand starts with uppercased letter and 3 <= brand length < 25',
+    dataTitle: 'brand starts with uppercased letter and 3 <= brand length <= 25',
+    validation: {
+      required: 'requiered',
+      minLength: {
+        value: 3,
+        message: 'min 3 letters',
+      },
+      maxLength: {
+        value: 25,
+        message: 'max 25 letters',
+      },
+      validate: {
+        firstLetterUpperCase: (value: string) =>
+          value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
+        onlyLetters: (value: string) => {
+          const onlyChars = new RegExp(/^([^0-9]*)$/);
+          return onlyChars.test(value) ? undefined : 'only letters';
+        },
+      },
+    },
   },
   {
     name: 'Description:',
@@ -24,6 +62,19 @@ export const inputValues: InputValues[] = [
     placeholder: 'description alcohol',
     inputName: 'description',
     dataTitle: 'at least 2 words and description length < 40',
+    validation: {
+      required: 'requiered',
+      maxLength: {
+        value: 40,
+        message: 'max 40 symbols',
+      },
+      validate: {
+        twoWords: (value: string) => {
+          const valueArray = value.split(' ');
+          return valueArray.length >= 2 && valueArray[1].length > 0 ? undefined : 'min 2 words';
+        },
+      },
+    },
   },
   {
     name: 'Price:',
@@ -32,6 +83,16 @@ export const inputValues: InputValues[] = [
     placeholder: 'price alcohol',
     inputName: 'price',
     dataTitle: 'positive numbers and price length < 25',
+    validation: {
+      required: 'requiered',
+      maxLength: {
+        value: 25,
+        message: 'max 25 numbers',
+      },
+      validate: {
+        positiveNumbers: (value: string) => (+value >= 0 ? undefined : 'positive numbers'),
+      },
+    },
   },
   {
     name: 'Date release:',
@@ -40,5 +101,8 @@ export const inputValues: InputValues[] = [
     placeholder: 'date alcohol',
     inputName: 'date',
     dataTitle: '',
+    validation: {
+      required: 'requiered',
+    },
   },
 ];

@@ -1,25 +1,19 @@
 import React, { FC } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { InputValue } from 'types';
 import styles from './style.module.css';
 
 interface IProps {
-  name: string;
-  type: string;
-  placeholder: string;
-  inputName: string;
-  forwardedRef: React.RefObject<HTMLInputElement>;
-  error: boolean;
-  dataTitle: string;
+  inputValue: InputValue;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
 }
 
-export const InputForm: FC<IProps> = ({
-  name,
-  type,
-  placeholder,
-  inputName,
-  forwardedRef,
-  error,
-  dataTitle,
-}) => {
+export const InputForm: FC<IProps> = ({ inputValue, register, errors }) => {
+  const { name, type, placeholder, inputName, dataTitle, validation } = inputValue;
+
+  const error = errors[inputName]?.message as string;
+
   return (
     <div className={styles.wrapper}>
       <label title={dataTitle}>{name}</label>
@@ -27,10 +21,9 @@ export const InputForm: FC<IProps> = ({
         className={styles.input}
         type={type}
         placeholder={placeholder}
-        ref={forwardedRef}
-        name={inputName}
+        {...register(`${inputName}`, validation)}
       />
-      {error && <div className={styles.error}>Error</div>}
+      {errors[inputName]?.message && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

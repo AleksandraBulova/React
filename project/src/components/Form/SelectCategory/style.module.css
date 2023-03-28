@@ -28,7 +28,7 @@
   color: red;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 570px) {
   .wrapper_select {
     flex-direction: column;
     gap: 5px;
