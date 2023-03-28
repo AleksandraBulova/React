@@ -37,8 +37,8 @@ export const MainPage: FC = () => {
     if (state.search) {
       const newProducts = filtertProducts(products, state.search);
       setState((prev) => ({ ...prev, products: newProducts }));
-      inputValue.current = state.search;
     }
+    inputValue.current = state.search;
   }, [state.search]);
 
   const setSearch = (value: string) => {
