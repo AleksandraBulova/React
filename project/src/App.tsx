@@ -16,11 +16,9 @@ const App: FC = () => {
         <MainLayout>
           <main className={styles.main}>
             <Routes>
-              {validRoutes
-                .filter((route) => route.name !== routeName404)
-                .map((route) => (
-                  <Route key={route.id} path={route.path} element={<route.element />} />
-                ))}
+              {validRoutes.map((route) => (
+                <Route key={route.id} path={route.path} element={<route.element />} />
+              ))}
               <Route path={Route404.path} element={<Route404.element />} />
             </Routes>
           </main>
