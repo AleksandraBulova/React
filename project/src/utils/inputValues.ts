@@ -22,7 +22,7 @@ export const inputValues: InputValue[] = [
         firstLetterUpperCase: (value: string) =>
           value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
         onlyLetters: (value: string) => {
-          const onlyChars = new RegExp(/^([^0-9]*)$/);
+          const onlyChars = new RegExp(/^[a-zA-Z\u00C0-\u024F]+( [a-zA-Z\u00C0-\u024F]+)?$/);
           return onlyChars.test(value) ? undefined : 'only letters';
         },
       },
@@ -49,7 +49,7 @@ export const inputValues: InputValue[] = [
         firstLetterUpperCase: (value: string) =>
           value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
         onlyLetters: (value: string) => {
-          const onlyChars = new RegExp(/^([^0-9]*)$/);
+          const onlyChars = new RegExp(/^[a-zA-Z\u00C0-\u024F]+( [a-zA-Z\u00C0-\u024F]+)?$/);
           return onlyChars.test(value) ? undefined : 'only letters';
         },
       },

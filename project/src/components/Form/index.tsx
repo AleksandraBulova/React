@@ -2,8 +2,9 @@ import React, { FC } from 'react';
 import { FieldValues, useForm } from 'react-hook-form';
 import { InputForm, SelectCategory, InputFile, InputRadio, InputCheckbox } from 'components';
 import { inputValues } from 'utils/inputValues';
-import styles from './style.module.css';
 import { convertToImageUrl } from 'utils/convertToImageUrl';
+import noPhoto from '../../assets/images/no_photo_card.png';
+import styles from './style.module.css';
 
 interface IProp {
   setCards: (data: FieldValues) => void;
@@ -18,10 +19,12 @@ export const Form: FC<IProp> = ({ setCards }) => {
   } = useForm({ mode: 'onSubmit' });
 
   const habdleSubmitForm = (data: FieldValues) => {
-    convertToImageUrl(data.photo).then((res) => {
-      data.photo = res;
-      setCards(data);
-    });
+    convertToImageUrl(data.photo)
+      .then((res) => {
+        data.photo = res;
+        setCards(data);
+      })
+      .catch((data.photo = noPhoto));
     reset();
   };
 
