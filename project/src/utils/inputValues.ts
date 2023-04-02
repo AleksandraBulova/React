@@ -10,19 +10,15 @@ export const inputValues: InputValue[] = [
     dataTitle: 'name starts with uppercase letter and 3 <= name length <= 25',
     validation: {
       required: 'requiered',
-      minLength: {
-        value: 3,
-        message: 'min 3 letters',
-      },
-      maxLength: {
-        value: 25,
-        message: 'max 25 letters',
-      },
       validate: {
+        minLength: (value: string) =>
+          value.replaceAll(' ', '').length >= 3 ? undefined : 'min 3 letters',
+        maxLength: (value: string) =>
+          value.replaceAll(' ', '').length <= 25 ? undefined : 'max 25 letters',
         firstLetterUpperCase: (value: string) =>
           value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
         onlyLetters: (value: string) => {
-          const onlyChars = new RegExp(/^[^\d\s]+([ ]?[^\d\s]+)*$/);
+          const onlyChars = new RegExp(/^([^0-9]*)$/);
           return onlyChars.test(value) ? undefined : 'only letters';
         },
       },
@@ -37,19 +33,15 @@ export const inputValues: InputValue[] = [
     dataTitle: 'brand starts with uppercased letter and 3 <= brand length <= 25',
     validation: {
       required: 'requiered',
-      minLength: {
-        value: 3,
-        message: 'min 3 letters',
-      },
-      maxLength: {
-        value: 25,
-        message: 'max 25 letters',
-      },
       validate: {
+        minLength: (value: string) =>
+          value.replaceAll(' ', '').length >= 3 ? undefined : 'min 3 letters',
+        maxLength: (value: string) =>
+          value.replaceAll(' ', '').length <= 25 ? undefined : 'max 25 letters',
         firstLetterUpperCase: (value: string) =>
           value.at(0) !== value.at(0)?.toUpperCase() ? '1st capital letter' : undefined,
         onlyLetters: (value: string) => {
-          const onlyChars = new RegExp(/^[^\d\s]+([ ]?[^\d\s]+)*$/);
+          const onlyChars = new RegExp(/^([^0-9]*)$/);
           return onlyChars.test(value) ? undefined : 'only letters';
         },
       },
