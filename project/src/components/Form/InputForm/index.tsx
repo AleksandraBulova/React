@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
+import { InputValue } from 'types';
 import styles from './style.module.css';
 
 interface IProps {
-  name: string;
-  type: string;
-  placeholder: string;
-  inputName: string;
-  forwardedRef: React.RefObject<HTMLInputElement>;
-  error: boolean;
-  dataTitle: string;
+  inputValue: InputValue;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
 }
 
-export class InputForm extends React.Component<IProps> {
-  render() {
-    const { name, type, placeholder, inputName, forwardedRef, error, dataTitle } = this.props;
+export const InputForm: FC<IProps> = ({ inputValue, register, errors }) => {
+  const { name, type, placeholder, inputName, dataTitle, validation } = inputValue;
 
-    return (
-      <div className={styles.wrapper}>
-        <label title={dataTitle}>{name}</label>
-        <input
-          className={styles.input}
-          type={type}
-          placeholder={placeholder}
-          ref={forwardedRef}
-          name={inputName}
-        />
-        {error && <div className={styles.error}>Error</div>}
-      </div>
-    );
-  }
-}
+  const error = errors[inputName]?.message as string;
+
+  return (
+    <div className={styles.wrapper}>
+      <label title={dataTitle}>{name}</label>
+      <input
+        className={styles.input}
+        type={type}
+        placeholder={placeholder}
+        {...register(`${inputName}`, validation)}
+      />
+      {errors[inputName]?.message && <div className={styles.error}>{error}</div>}
+    </div>
+  );
+};

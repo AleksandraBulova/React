@@ -1,35 +1,38 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form';
 import styles from './style.module.css';
 
 interface IProp {
-  forwardedRef: React.RefObject<HTMLInputElement>;
-  error: boolean;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
 }
 
-export class InputRadio extends React.Component<IProp> {
-  render() {
-    const strengths = ['0% - 20%', '20% - 40%', '40% - 60%'];
-    return (
-      <div className={styles.wrapper}>
-        <label className={styles.wrapper_radio}>
-          Alcohol strength:
-          {strengths.map((elem, index) => {
-            return (
-              <div key={index}>
-                <input
-                  type="radio"
-                  id={`strength${index}`}
-                  name="strength"
-                  value={elem}
-                  ref={this.props.forwardedRef}
-                />
-                <label htmlFor={`strength${index}`}>{elem}</label>
-              </div>
-            );
-          })}
-        </label>
-        {this.props.error && <div className={styles.error}>Error</div>}
-      </div>
-    );
-  }
-}
+export const InputRadio: FC<IProp> = ({ register, errors }) => {
+  const strengths = ['0% - 20%', '20% - 40%', '40% - 60%'];
+  const nameStrength = 'strength';
+  const error = errors[nameStrength]?.message as string;
+
+  return (
+    <div className={styles.wrapper}>
+      <label className={styles.wrapper_radio}>
+        Alcohol strength:
+        {strengths.map((elem, index) => {
+          return (
+            <div key={index}>
+              <input
+                type="radio"
+                id={`strength${index}`}
+                value={elem}
+                {...register(`${nameStrength}`, {
+                  required: 'requiered',
+                })}
+              />
+              <label htmlFor={`strength${index}`}>{elem}</label>
+            </div>
+          );
+        })}
+      </label>
+      {errors[nameStrength]?.message && <div className={styles.error}>{error}</div>}
+    </div>
+  );
+};

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import styles from './style.module.css';
 
 interface IProps {
@@ -6,21 +6,17 @@ interface IProps {
   setSearch: (value: string) => void;
 }
 
-export class SectionHeader extends React.Component<IProps> {
-  render() {
-    return (
-      <header className={styles.header_section}>
-        <h3>Search: </h3>
-        <input
-          className={styles.search}
-          type="text"
-          value={this.props.search}
-          placeholder="  search product"
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            this.props.setSearch(event.target.value)
-          }
-        />
-      </header>
-    );
-  }
-}
+export const SectionHeader: FC<IProps> = ({ search, setSearch }) => {
+  return (
+    <header className={styles.header_section}>
+      <h3>Search: </h3>
+      <input
+        className={styles.search}
+        type="text"
+        value={search}
+        placeholder="  search product"
+        onChange={(event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)}
+      />
+    </header>
+  );
+};

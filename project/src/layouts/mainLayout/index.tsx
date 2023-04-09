@@ -1,17 +1,15 @@
 import { Header } from 'components';
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 
 interface MainLayoutProps {
   children: ReactNode;
 }
 
-export class MainLayout extends React.Component<MainLayoutProps> {
-  render() {
-    return (
-      <>
-        <Header />
-        {this.props.children}
-      </>
-    );
-  }
-}
+export const MainLayout: FC<MainLayoutProps> = ({ children }) => {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
+  );
+};
