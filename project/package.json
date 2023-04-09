@@ -10,7 +10,10 @@
       "!src/declaration.d.ts",
       "!src/react-app-env.d.ts",
       "!src/components/index.ts",
-      "!src/pages/index.ts"
+      "!src/pages/index.ts",
+      "!src/utils/convertToImageUrl.ts",
+      "!src/utils/inputValues.ts",
+      "!src/API/api.ts"
     ]
   },
   "dependencies": {
