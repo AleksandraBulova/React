@@ -1,12 +1,13 @@
 import React, { ChangeEvent, FC } from 'react';
 import styles from './style.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from 'redux/store';
+import { setSearch } from 'redux/reducers/productsReducer';
 
-interface IProps {
-  search: string;
-  setSearch: (value: string) => void;
-}
+export const SectionHeader: FC = () => {
+  const { search } = useSelector((state: RootState) => state.products);
+  const dispatch = useDispatch();
 
-export const SectionHeader: FC<IProps> = ({ search, setSearch }) => {
   return (
     <header className={styles.header_section}>
       <h3>Search: </h3>
@@ -15,7 +16,7 @@ export const SectionHeader: FC<IProps> = ({ search, setSearch }) => {
         type="text"
         value={search}
         placeholder="  search product"
-        onChange={(event: ChangeEvent<HTMLInputElement>) => setSearch(event.target.value)}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => dispatch(setSearch(event.target.value))}
       />
     </header>
   );

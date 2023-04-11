@@ -1,17 +1,16 @@
 import React, { FC } from 'react';
-import { Product } from 'types';
+import { useSelector } from 'react-redux';
+import { RootState } from 'redux/store';
 import { ProductCard } from 'components';
 import styles from './style.module.css';
 
-interface IProps {
-  products: Product[];
-}
+export const SectionProducts: FC = () => {
+  const { viewProducts } = useSelector((state: RootState) => state.products);
 
-export const SectionProducts: FC<IProps> = ({ products }) => {
   return (
     <div className={styles.wrapper_products}>
-      {products.length ? (
-        products.map((product) => <ProductCard key={product.id} product={product} />)
+      {viewProducts.length ? (
+        viewProducts.map((product) => <ProductCard key={product.id} product={product} />)
       ) : (
         <div className={styles.text_no_products}>No products found!</div>
       )}
