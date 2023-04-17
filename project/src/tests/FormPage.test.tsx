@@ -1,11 +1,17 @@
 import '@testing-library/jest-dom';
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, screen, act } from '@testing-library/react';
 import { FormPage } from 'pages';
+import { Provider } from 'react-redux';
+import { store } from 'redux/store';
 
 describe('FormPage', () => {
-  it('render AboutPage component', () => {
-    const { getByText, getByPlaceholderText } = render(<FormPage />);
+  it('render AboutPage component', async () => {
+    const { getByText, getByPlaceholderText } = render(
+      <Provider store={store}>
+        <FormPage />
+      </Provider>
+    );
     const name = getByText(/Name:/i);
     expect(name).toBeInTheDocument();
     const brand = getByText(/Brand:/i);
@@ -31,6 +37,7 @@ describe('FormPage', () => {
     expect(namePlaceholder).toBeInTheDocument();
     fireEvent.change(namePlaceholder, { target: { value: 'Rosado' } });
     expect(namePlaceholder.value).toBe('Rosado');
+    fireEvent.change(namePlaceholder, { target: { value: 'rosado' } });
 
     const brandPlaceholder = getByPlaceholderText(/brand alcohol/i) as HTMLInputElement;
     expect(brandPlaceholder).toBeInTheDocument();
@@ -41,17 +48,27 @@ describe('FormPage', () => {
     expect(descriptionPlaceholder).toBeInTheDocument();
     fireEvent.change(descriptionPlaceholder, { target: { value: 'Rose, dry, 0.75l.' } });
     expect(descriptionPlaceholder.value).toBe('Rose, dry, 0.75l.');
+    fireEvent.change(descriptionPlaceholder, { target: { value: 'Rose' } });
 
     const pricePlaceholder = getByPlaceholderText(/price alcohol/i) as HTMLInputElement;
     expect(pricePlaceholder).toBeInTheDocument();
     fireEvent.change(pricePlaceholder, { target: { value: 25 } });
     expect(pricePlaceholder.value).toBe('25');
+    fireEvent.change(pricePlaceholder, { target: { value: -25 } });
 
     const datePlaceholder = getByPlaceholderText(/date alcohol/i) as HTMLInputElement;
     expect(datePlaceholder).toBeInTheDocument();
     fireEvent.change(datePlaceholder, { target: { value: '2023-03-24' } });
     expect(datePlaceholder.value).toBe('2023-03-24');
 
-    fireEvent.click(submit);
+    await act(async () => fireEvent.click(submit));
+    const nameErr = screen.getByText(/1st capital letter/i);
+    expect(nameErr).toBeInTheDocument();
+
+    const descriptionErr = screen.getByText(/min 2 words/i);
+    expect(descriptionErr).toBeInTheDocument();
+
+    const priceErr = screen.getByText(/positive numbers/i);
+    expect(priceErr).toBeInTheDocument();
   });
 });

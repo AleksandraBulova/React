@@ -1,16 +1,16 @@
 import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { FieldValues, useForm } from 'react-hook-form';
 import { InputForm, SelectCategory, InputFile, InputRadio, InputCheckbox } from 'components';
 import { inputValues } from 'utils/inputValues';
 import { convertToImageUrl } from 'utils/convertToImageUrl';
 import noPhoto from '../../assets/images/no_photo_card.png';
 import styles from './style.module.css';
+import { setFormProducts } from 'redux/reducers/productsReducer';
 
-interface IProp {
-  setCards: (data: FieldValues) => void;
-}
+export const Form: FC = () => {
+  const dispatch = useDispatch();
 
-export const Form: FC<IProp> = ({ setCards }) => {
   const {
     register,
     formState: { errors },
@@ -22,7 +22,7 @@ export const Form: FC<IProp> = ({ setCards }) => {
     convertToImageUrl(data.photo)
       .then((res) => {
         data.photo = res;
-        setCards(data);
+        dispatch(setFormProducts(data));
       })
       .catch((data.photo = noPhoto));
     reset();
